@@ -1,0 +1,120 @@
+<html xmlns="https://www.w3.org/TR/xhtml1/" >
+	<head>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				//Validate whether File is valid Excel file
+				(async() => {
+					const url = "/sheet";
+					const data = await (await fetch(url)).arrayBuffer();
+					/* data is an ArrayBuffer */
+					GetTableFromExcel(data)
+
+					/* DO SOMETHING WITH workbook HERE */
+				})();
+
+			};
+			function GetTableFromExcel(data) {
+				//Read the Excel File data in binary
+				var workbook = XLSX.read(data, {type: 'array'});
+		 
+				//get the name of First Sheet.
+				var Sheet = workbook.SheetNames[0];
+		 
+				//Read all rows from First Sheet into an JSON array.
+				var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[Sheet]);
+		 
+				//Create a HTML Table element.
+				var myTable  = document.createElement("table");
+				myTable.border = "1";
+		 
+				//Add the header row.
+				var row = myTable.insertRow(-1);
+		 
+				//Add the header cells.
+				var headerCell = document.createElement("TH");
+				headerCell.innerHTML = "HO_TEN";
+				row.appendChild(headerCell);
+		 
+				headerCell = document.createElement("TH");
+				headerCell.innerHTML = "SOBAODANH";
+				row.appendChild(headerCell);
+		 
+				headerCell = document.createElement("TH");
+				headerCell.innerHTML = "DIEM_THI";
+				row.appendChild(headerCell);
+				
+				headerCell = document.createElement("TH");
+				headerCell.innerHTML = "DIEM_NGU_VAN";
+				row.appendChild(headerCell);
+				
+				headerCell = document.createElement("TH");
+				headerCell.innerHTML = "DIEM_NGOAI_NGU";
+				row.appendChild(headerCell);
+				 
+				 headerCell = document.createElement("TH");
+				headerCell.innerHTML = "DIEM_TOAN";
+				row.appendChild(headerCell);
+		 
+		 
+				//Add the data rows from Excel file.
+				for (var i = 0; i < excelRows.length; i++) {
+					//Add the data row.
+					var row = myTable.insertRow(-1);
+		 
+					//Add the data cells.
+					var cell = row.insertCell(-1);
+					cell.innerHTML = excelRows[i].HO_TEN;
+		 
+					cell = row.insertCell(-1);
+					cell.innerHTML = excelRows[i].SOBAODANH;
+		 
+					cell = row.insertCell(-1);
+					cell.innerHTML = excelRows[i].DIEM_THI;
+					
+					cell = row.insertCell(-1);
+					cell.innerHTML = excelRows[i].DIEM_NGU_VAN;
+					
+					cell = row.insertCell(-1);
+					cell.innerHTML = excelRows[i].DIEM_NGOAI_NGU;
+					
+					cell = row.insertCell(-1);
+					cell.innerHTML = excelRows[i].DIEM_TOAN;
+				}
+				
+		 
+				var ExcelTable = document.getElementById("ExcelTable");
+				ExcelTable.innerHTML = "";
+				ExcelTable.appendChild(myTable);
+			};
+		</script>
+		<style>
+			body{
+				padding: 0;
+				margin: 0;
+			}
+			table{
+				background: rgb(29, 29, 29);
+				color:rgb(212, 212, 212);
+				border: none;
+			}
+			th{
+				padding: 5px;
+				border: 1px solid rgb(34, 34, 34)
+			} 
+			td{
+				background: rgb(29, 29, 29);
+				padding: 5px;
+				border: 1px solid rgb(34, 34, 34);
+				transition: 0.2s;
+			}
+			td:hover{
+				background: rgb(8, 8, 8);
+			}
+		</style>
+	</head>
+	<setup>
+		<div id="ExcelTable"></div>
+	</setup>
+</html>
