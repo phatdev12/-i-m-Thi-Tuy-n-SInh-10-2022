@@ -1,6 +1,8 @@
 # Dữ Liệu Điểm Tuyển Sinh 10 TP. Đà Nẵng Năm 2022
 
-<img src="https://img.shields.io/appveyor/build/phatdev12/Diem-Thi-Tuyen-Sinh-10-2022?style=for-the-badge"/>
+![](https://img.shields.io/github/license/phatdev12/Diem-Thi-Tuyen-Sinh-10-2022?style=for-the-badge)
+![](https://img.shields.io/github/repo-size/phatdev12/Diem-Thi-Tuyen-Sinh-10-2022?style=for-the-badge)
+![](https://img.shields.io/github/directory-file-count/phatdev12/Diem-Thi-Tuyen-Sinh-10-2022?style=for-the-badge)
 
 File data thông tin điểm thi tuyển sinh 10 đà nẵng 2022
 
